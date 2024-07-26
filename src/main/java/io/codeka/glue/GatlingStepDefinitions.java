@@ -56,6 +56,16 @@ public class GatlingStepDefinitions {
         );
     }
 
+    @When("pause of {int} seconds")
+    public void pause(int seconds) {
+        scenarioBuilder = scenarioBuilder.pause(seconds);
+    }
+
+    @When("pause between {int} and {int} seconds")
+    public void pause(int minSeconds, int maxSeconds) {
+        scenarioBuilder = scenarioBuilder.pause(minSeconds, maxSeconds);
+    }
+
     @Given("{int} user")
     public void user(Integer users) {
         // Write code here that turns the phrase above into concrete actions
