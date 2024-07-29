@@ -10,11 +10,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.gatling.javaapi.core.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static io.gatling.javaapi.core.CoreDsl.*;
 import static io.gatling.javaapi.http.HttpDsl.*;
 
 /**
- * This Cucumber Glue (StepDefinition) generates a Gatling Scenario as an output !
+ * This Cucumber Glue (StepDefinition) that generates a Gatling Scenario as an output.
+ * This class can be extended to allow adding your own definitions.
  */
 public class GatlingStepDefinitions {
 
@@ -22,7 +27,7 @@ public class GatlingStepDefinitions {
 
     private ScenarioBuilder scenarioBuilder;
 
-    private OpenInjectionStep injectionStep;
+    private List<OpenInjectionStep> injectionSteps;
 
     private GatlingScenarioRegistry scenarioRegistry;
 
@@ -30,22 +35,36 @@ public class GatlingStepDefinitions {
         this.scenarioRegistry = GatlingScenarioRegistry.getInstance();
     }
 
+    public ScenarioBuilder getScenarioBuilder() {
+        return scenarioBuilder;
+    }
+
+    public void addInjectionStep(OpenInjectionStep injectionStep) {
+        this.injectionSteps.add(injectionStep);
+    }
+
+    /**
+     * This hook re-creates a new Gatling scenario for the current Cucumber scenario, using the Cucumber scenario name.
+     * @param scenario the Cucumber scenario
+     */
     @Before
     public void before(Scenario scenario) {
         LOGGER.info("Reading Gatling Scenario {}", scenario.getName());
         scenarioBuilder = scenario(scenario.getName());
+        injectionSteps = new ArrayList<>();
     }
 
     @After
     public void after(Scenario scenario) {
         LOGGER.info("Sending scenario {} to Gatling", scenario.getName());
-        this.scenarioRegistry.add(scenarioBuilder.injectOpen(this.injectionStep));
+        this.scenarioRegistry.add(scenarioBuilder.injectOpen(this.injectionSteps));
     }
 
     @Given("{int} constant users per second during {int} seconds")
     public void constant_users_per_second_during_seconds(Integer rate, Integer duration) {
         // saving injection step to build the scenario when step definition ends
-        this.injectionStep = constantUsersPerSec(rate).during(duration.longValue());
+        var injection = constantUsersPerSec(rate).during(duration.longValue());
+        injectionSteps.add(injection);
     }
 
     @When("http request {string}")
@@ -66,12 +85,11 @@ public class GatlingStepDefinitions {
         scenarioBuilder = scenarioBuilder.pause(minSeconds, maxSeconds);
     }
 
-    @Given("{int} user")
-    public void user(Integer users) {
+    @Given("{int} users? at once")
+    public void userAtOnce(Integer users) {
         // Write code here that turns the phrase above into concrete actions
-        this.injectionStep = atOnceUsers(users);
+        var atOnceInjection = atOnceUsers(users);
+        this.injectionSteps.add(atOnceInjection);
     }
-
-
 
 }
