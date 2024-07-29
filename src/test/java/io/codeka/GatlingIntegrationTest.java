@@ -11,7 +11,6 @@ class GatlingIntegrationTest {
     void testGatlingRun() {
         int returnCode = Gatling$.MODULE$.fromArgs(new String[]{
                 "--simulation=io.codeka.CucumberSimulation",
-                "--no-reports",
                 "--results-folder=target/"
         });
         assertEquals(0, returnCode);

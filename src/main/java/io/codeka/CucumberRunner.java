@@ -24,6 +24,7 @@ public class CucumberRunner {
         LOGGER.info("Running Cucumber Scenarios");
         RuntimeOptions runtimeOptions = new RuntimeOptionsBuilder()
                 .addGlue(GluePath.parse("io.codeka.glue"))
+                .addDefaultSummaryPrinterIfNotDisabled()
                 .addFeature(FeatureWithLines.parse("classpath:/features/"))
                 .build();
 
