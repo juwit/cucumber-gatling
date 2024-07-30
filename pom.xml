@@ -28,6 +28,13 @@
             <version>${cucumber.version}</version>
         </dependency>
 
+        <!-- using pico container DI -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-picocontainer</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+
         <!-- gatling -->
         <dependency>
             <groupId>io.gatling</groupId>
