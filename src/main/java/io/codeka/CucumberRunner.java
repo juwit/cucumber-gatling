@@ -33,7 +33,6 @@ public class CucumberRunner {
         cucumberRuntime.run();
 
         LOGGER.info("Building Gatling Simulations");
-        GatlingScenarioRegistry scenarioRegistry = GatlingScenarioRegistry.getInstance();
-        gatlingSimulation.setUp(scenarioRegistry.getAllScenarios());
+        gatlingSimulation.setUp(GatlingScenarioRegistry.getAllScenarios());
     }
 }

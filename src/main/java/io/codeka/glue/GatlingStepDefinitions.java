@@ -5,13 +5,13 @@ import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import io.gatling.javaapi.core.OpenInjectionStep;
 import io.gatling.javaapi.core.ScenarioBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.gatling.javaapi.core.*;
 import static io.gatling.javaapi.core.CoreDsl.*;
-import static io.gatling.javaapi.http.HttpDsl.*;
+import static io.gatling.javaapi.http.HttpDsl.http;
 
 /**
  * This Cucumber Glue (StepDefinition) generates a Gatling Scenario as an output !
@@ -26,8 +26,8 @@ public class GatlingStepDefinitions {
 
     private GatlingScenarioRegistry scenarioRegistry;
 
-    public GatlingStepDefinitions() {
-        this.scenarioRegistry = GatlingScenarioRegistry.getInstance();
+    public GatlingStepDefinitions(GatlingScenarioRegistry scenarioRegistry) {
+        this.scenarioRegistry = scenarioRegistry;
     }
 
     @Before

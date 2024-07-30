@@ -11,22 +11,13 @@ import java.util.List;
  */
 public class GatlingScenarioRegistry {
 
-    private static final GatlingScenarioRegistry INSTANCE = new GatlingScenarioRegistry();
-
-    private final List<PopulationBuilder> populationBuilders = new ArrayList<>();
-
-    private GatlingScenarioRegistry() {
-    }
-
-    public static GatlingScenarioRegistry getInstance() {
-        return INSTANCE;
-    }
+    private static final List<PopulationBuilder> populationBuilders = new ArrayList<>();
 
     public void add(PopulationBuilder populationBuilder) {
         populationBuilders.add(populationBuilder);
     }
 
-    public List<PopulationBuilder> getAllScenarios() {
+    public static List<PopulationBuilder> getAllScenarios() {
         return populationBuilders;
     }
 }
