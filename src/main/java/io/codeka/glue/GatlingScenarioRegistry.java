@@ -13,11 +13,11 @@ public class GatlingScenarioRegistry {
 
     private static final List<PopulationBuilder> populationBuilders = new ArrayList<>();
 
-    public void add(PopulationBuilder populationBuilder) {
-        populationBuilders.add(populationBuilder);
-    }
-
     public static List<PopulationBuilder> getAllScenarios() {
         return populationBuilders;
+    }
+
+    public void add(PopulationBuilder populationBuilder) {
+        populationBuilders.add(populationBuilder);
     }
 }

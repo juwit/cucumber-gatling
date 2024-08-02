@@ -33,10 +33,9 @@ public class CucumberRunner {
                 .build();
         cucumberRuntime.run();
 
-        if(cucumberRuntime.exitStatus() != 0){
+        if (cucumberRuntime.exitStatus() != 0) {
             LOGGER.error("Cucumber encountered an error during its execution, exiting");
-        }
-        else {
+        } else {
             LOGGER.info("Building Gatling Simulations");
             gatlingSimulation.setUp(GatlingScenarioRegistry.getAllScenarios());
         }
