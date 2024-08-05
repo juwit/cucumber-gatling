@@ -1,6 +1,7 @@
 package io.codeka.glue;
 
 import io.gatling.javaapi.core.ChainBuilder;
+import io.gatling.javaapi.core.FeederBuilder;
 import io.gatling.javaapi.core.OpenInjectionStep;
 import io.gatling.javaapi.core.ScenarioBuilder;
 import io.gatling.javaapi.core.exec.Executable;
@@ -48,5 +49,9 @@ public class CucumberGatlingScenarioBuilderHelper {
 
     public void addPause(ChainBuilder pause) {
         this.scenarioBuilder = this.scenarioBuilder.exec(pause);
+    }
+
+    public void feed(FeederBuilder feed) {
+        this.scenarioBuilder = this.scenarioBuilder.feed(feed);
     }
 }
