@@ -28,7 +28,7 @@ public class UsersInjectionStepDefinitions {
     }
 
     @Given("no user(s) for {int} seconds")
-    public void noUsersFor(Long duration) {
+    public void noUsersFor(int duration) {
         helper.addInjectionStep(nothingFor(duration));
     }
 
