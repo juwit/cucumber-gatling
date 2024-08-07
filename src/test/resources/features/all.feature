@@ -17,3 +17,9 @@ Feature: Step Definitions test
 
   Scenario: Feed Step Definitions
     Given random data from the csv file "data/file.csv"
+
+  Scenario: HTTP Request Step Definitions
+    When http request to url "https://pokeapi.co/api/v2/pokemon/${poke}" with parameters
+      | type   | name      | value         |
+      | header | X-API-KEY | dummy API key |
+      | query  | poke      | ditto         |
