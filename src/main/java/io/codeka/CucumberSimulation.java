@@ -13,4 +13,8 @@ public class CucumberSimulation extends Simulation {
         cucumberRunner.setUpSimulation(this);
     }
 
+    public String getFeaturePath() {
+        return "classpath:/features/";
+    }
+
 }
